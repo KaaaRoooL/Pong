@@ -1429,6 +1429,7 @@ GameObject:
   - component: {fileID: 1317697676}
   - component: {fileID: 1317697679}
   - component: {fileID: 1317697678}
+  - component: {fileID: 1317697680}
   m_Layer: 0
   m_Name: Bola
   m_TagString: Untagged
@@ -1531,7 +1532,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1317697675}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 021032c6264e0de4b85bc9cae4621c49, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1548,6 +1549,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1317697680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317697675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df8520761a57a34c8b65cc8c4a18dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 30
 --- !u!1 &1358970502
 GameObject:
   m_ObjectHideFlags: 0
