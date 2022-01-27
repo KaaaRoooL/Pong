@@ -17,6 +17,12 @@ public class Bola : MonoBehaviour
     [SerializeField] private Text contadorIzquierda;
     [SerializeField] private Text contadorDerecha;
 
+    //Audio Source
+    AudioSource fuenteDeAudio;
+
+    //Clips de audio
+    [SerializeField] private AudioClip audioGol, audioRaqueta, audioRebote;
+
     //Se ejecuta al arrancar
     void Start () {
 
@@ -26,6 +32,9 @@ public class Bola : MonoBehaviour
         //Pongo los contadores a 0
         contadorIzquierda.text = golesIzquierda.ToString();
         contadorDerecha.text = golesDerecha.ToString();
+
+        //Recupero el componente audio source;
+        fuenteDeAudio = GetComponent<AudioSource>();
 
  
     }
@@ -47,6 +56,9 @@ public class Bola : MonoBehaviour
 
         //Si choca con la raqueta izquierda
         if (micolision.gameObject.name == "RaquetaIzquierda"){
+            //Reproduzco el sonido de la raqueta
+            fuenteDeAudio.clip = audioRaqueta;
+            fuenteDeAudio.Play();
 
             //Valor de x
             int x = 1;
@@ -63,6 +75,9 @@ public class Bola : MonoBehaviour
 
         //Si choca con la raqueta derecha
         if (micolision.gameObject.name == "RaquetaDerecha"){
+            //Reproduzco el sonido de la raqueta
+            fuenteDeAudio.clip = audioRaqueta;
+            fuenteDeAudio.Play();
 
             //Valor de x
             int x = -1;
@@ -75,8 +90,18 @@ public class Bola : MonoBehaviour
 
             //Aplico velocidad
             GetComponent<Rigidbody2D>().velocity = direccion * velocidad;
-
         }
+
+        //Para el sonido del rebote
+        if (micolision.gameObject.name == "Arriba" || micolision.gameObject.name == "Abajo"){
+
+            //Reproduzco el sonido del rebote
+            fuenteDeAudio.clip = audioRebote;
+            fuenteDeAudio.Play();
+
+}
+
+
     }
 
     //Método para calcular la direccion de Y (deevuelve un número entero int)
@@ -97,6 +122,10 @@ public class Bola : MonoBehaviour
 
     //Reinicio la posición de la bola
     public void reiniciarBola(string direccion){
+
+        //Reproduzco el sonido del gol
+        fuenteDeAudio.clip = audioGol;
+        fuenteDeAudio.Play();
 
         //Posición 0 de la bola
         transform.position = Vector2.zero;
