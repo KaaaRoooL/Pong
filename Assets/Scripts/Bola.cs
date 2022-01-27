@@ -42,7 +42,10 @@ public class Bola : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
+        //Incremento la velocidad de la bola
+        velocidad = velocidad + 2 * Time.deltaTime;
+
     }
 
     //Se ejecuta al colisionar
