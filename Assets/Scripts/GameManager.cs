@@ -13,5 +13,11 @@ public class GameManager : MonoBehaviour {
       //Cargo la escena de Juego
       SceneManager.LoadScene("Juego");
     }
+
+    //Si pulsa la tecla I vuelve al inicio
+    if (Input.GetKeyDown(KeyCode.I)){
+    //Cargo la escena de Inicio
+    SceneManager.LoadScene("Inicio");
+    }
   }
 }
