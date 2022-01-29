@@ -26,9 +26,15 @@ public class Bola : MonoBehaviour
     //Resultado
     [SerializeField] private Text resultado;
 
-
+    //Centro y bola para ocultarlos cuando acaba el juego
     [SerializeField] private GameObject centro;
     [SerializeField] private GameObject bola;
+
+    //Caja de texto para el temporizador
+    [SerializeField] private Text temporizador;  
+
+    //variable para contabilizar el tiempo inicializada a 180 segundos (3 minutos)
+    private float tiempo = 180;  
     
 
     //Se ejecuta al arrancar
@@ -59,6 +65,39 @@ public class Bola : MonoBehaviour
 
         //Incremento la velocidad de la bola
         velocidad = velocidad + 2 * Time.deltaTime;
+
+        //Si aún no se ha acabado el tiempo, decremento su valor y lo muestro en la caja de texto
+        if (tiempo >= 0){
+        tiempo -= Time.deltaTime; //Le resto el tiempo transcurrido en cada frame
+        temporizador.text = formatearTiempo(tiempo); //Formateo el tiempo y lo escribo en la caja de texto
+        }
+        //Si se ha acabado el tiempo, compruebo quién ha ganado y se acaba el juego
+        else{
+        temporizador.text = "00:00"; //Para evitar valores negativos	
+        //Compruebo quién ha ganado
+        if (golesIzquierda > golesDerecha){
+            centro.SetActive(false);
+            bola.SetActive(false);
+            //Escribo y muestro el resultado
+            
+            resultado.text = "¡Jugador Izquierda GANA!\nPulsa I para volver a Inicio\nPulsa P para volver a jugar";
+        }
+        else if (golesDerecha > golesIzquierda){
+            centro.SetActive(false);
+            bola.SetActive(false);
+            //Escribo y muestro el resultado
+            resultado.text = "¡Jugador Derecha GANA!\nPulsa I para volver a Inicio\nPulsa P para volver a jugar";
+        }
+        else{
+            //Escribo y muestro el resultado
+            centro.SetActive(false);
+            bola.SetActive(false);
+            resultado.text = "¡EMPATE!\nPulsa I para volver a Inicio\nPulsa P para volver a jugar";
+        }
+        //Muestro el resultado, pauso el juego y devuelvo true
+        resultado.enabled = true;
+        Time.timeScale = 0; //Pausa
+        }
 
     }
 
@@ -209,4 +248,17 @@ public class Bola : MonoBehaviour
             return false;
         }
     }
+
+
+    string formatearTiempo(float tiempo){
+
+    //Formateo minutos y segundos a dos dígitos
+        string minutos = Mathf.Floor(tiempo / 60).ToString("00");
+        string segundos = Mathf.Floor(tiempo % 60).ToString("00");
+        
+        //Devuelvo el string formateado con : como separador
+        return minutos + ":" + segundos;
+    
+    }
+
 }
